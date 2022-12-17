@@ -63,7 +63,14 @@ if len(sys.argv) == 1:
     import subprocess
 
     print("Opening editor...")
-    subprocess.Popen("beat-marker_gui.exe")
+
+    if sys.platform.startswith("darwin"):
+        subprocess.Popen("open beat-marker_gui.app")
+    elif sys.platform.startswith("win") or sys.platform.startswith("cygwin"):
+        subprocess.Popen("beat-marker_gui.exe")
+    elif sys.platform.startswith("linux"):
+        subprocess.Popen("./beat-marker_gui")
+
     sys.exit()
 
 if sys.argv[1] == "timeline":
