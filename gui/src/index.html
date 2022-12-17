@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Beat Marker</title>
+    <script defer src="client.js"></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <header>
+      <div class="title">Beat Marker</div>
+      <div id="close" class="close">X</div>
+    </header>
+    <main>
+      <div class="row">
+        <button id="timeline" class="activated">Timeline</button>
+        <button id="clip">Clip</button>
+      </div>
+      <div class="row">
+        <input id="bpm" type="text" placeholder="BPM" />
+      </div>
+      <div class="row">
+        <input id="offset" type="text" placeholder="Offset"/>
+      </div>
+      <div id="row-track" class="row">
+        <input id="track" type="text" placeholder="Track"/>
+      </div>
+      <div class="row">
+        <button id="generate">Generate Markers</button>
+      </div>
+      <div class="row">
+        <button id="clear">Clear Markers</button>
+      </div>
+    </body>
+    </main>
+</html>
