@@ -58,20 +58,32 @@ ipcMain.handle("executeScript", (event, type, track, bpm, offset) => {
 
   if (type == "timeline") {
 
-    let process = spawn("python", ["main.py", "timeline", bpm, offset])
+    let command = "python3"
 
-    process.stdout.on("data", (msg) => {
+    if (process.platform === "win32") {
+      command = "python"
+    }
+
+    let childProcess = spawn(command, ["main.py", "timeline", bpm, offset])
+
+    childProcess.stdout.on("data", (msg) => {
       dialog.showErrorBox("Error", msg.toString())
     })
 
   }
   else if (type == "clip") {
 
-    let process = spawn("python", ["main.py", "clip", track, bpm, offset], {
+    let command = "python3"
+
+    if (process.platform === "win32") {
+      command = "python"
+    }
+
+    let childProcess = spawn(command, ["main.py", "clip", track, bpm, offset], {
       stdio:[null, null, null, null, "ipc"]
     })
 
-    process.stdout.on("data", (msg) => {
+    childProcess.stdout.on("data", (msg) => {
       dialog.showErrorBox("Error", msg.toString())
     })
 
