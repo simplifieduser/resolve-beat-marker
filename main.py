@@ -5,13 +5,6 @@ import sys
 import inspect
 import pathlib
 
-# SET WORKING DIRECTORY
-
-sourceFile = inspect.getfile(lambda: None)
-path = pathlib.Path(sourceFile)
-path = path.parent.absolute()
-os.chdir(path)
-
 # GET RESOLVE
 
 try:
@@ -62,14 +55,21 @@ if timeline == None:
 if len(sys.argv) == 1:
     import subprocess
 
+    sourceFile = inspect.getfile(lambda: None)
+    path = pathlib.Path(sourceFile)
+    path = path.parent.absolute()
+
     print("Opening editor...")
 
     if sys.platform.startswith("darwin"):
-        subprocess.Popen("open beat-marker_gui.app")
+        command = 'open "' + str(path) +'/beat-marker_gui.app"'
+        subprocess.Popen(command)
     elif sys.platform.startswith("win") or sys.platform.startswith("cygwin"):
-        subprocess.Popen("beat-marker_gui.exe")
+        command = '"' + str(path) + '\\beat-marker_gui.exe"'
+        subprocess.Popen(command)
     elif sys.platform.startswith("linux"):
-        subprocess.Popen("./beat-marker_gui")
+        command = '"' + str(path) + '/beat-marker_gui"'
+        subprocess.Popen(command)
 
     sys.exit()
 

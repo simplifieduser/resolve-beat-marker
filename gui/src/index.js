@@ -56,15 +56,18 @@ ipcMain.handle("quitApp", () => {
 
 ipcMain.handle("executeScript", (event, type, track, bpm, offset) => {
 
+  let parentPath = app.getPath("exe")
+  parentPath = path.dirname(parentPath)
+
+  let command = "python3"
+
+  if (process.platform === "win32") {
+    command = "python"
+  }
+
   if (type == "timeline") {
 
-    let command = "python3"
-
-    if (process.platform === "win32") {
-      command = "python"
-    }
-
-    let childProcess = spawn(command, ["main.py", "timeline", bpm, offset])
+    let childProcess = spawn(command, [path.join(parentPath, "main.py"), "timeline", bpm, offset])
 
     childProcess.stdout.on("data", (msg) => {
       dialog.showErrorBox("Error", msg.toString())
@@ -73,15 +76,7 @@ ipcMain.handle("executeScript", (event, type, track, bpm, offset) => {
   }
   else if (type == "clip") {
 
-    let command = "python3"
-
-    if (process.platform === "win32") {
-      command = "python"
-    }
-
-    let childProcess = spawn(command, ["main.py", "clip", track, bpm, offset], {
-      stdio:[null, null, null, null, "ipc"]
-    })
+    let childProcess = spawn(command, [path.join(parentPath, "main.py"), "clip", track, bpm, offset])
 
     childProcess.stdout.on("data", (msg) => {
       dialog.showErrorBox("Error", msg.toString())
