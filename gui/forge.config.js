@@ -8,7 +8,15 @@ module.exports = {
     afterCopy: [
       serialHooks([
         (buildPath) => {
-          return fs.copyFile("../main.py", path.resolve(buildPath, "../", "../", "main.py"))
+
+          if (process.platform === "darwin") {
+            return fs.copyFile("../main.py", path.resolve(buildPath, "../", "../", "../", "../", "main.py"))
+          }
+          else if (process.platform === "win32") {
+            return fs.copyFile("../main.py", path.resolve(buildPath, "../", "../", "main.py"))
+          }
+
+          return Promise.resolve()
         }
       ])
     ],
