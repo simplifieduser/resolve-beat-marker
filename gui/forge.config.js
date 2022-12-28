@@ -10,10 +10,10 @@ module.exports = {
         (buildPath) => {
 
           if (process.platform === "darwin") {
-            return fs.copyFile("../main.py", path.resolve(buildPath, "../", "../", "../", "../", "main.py"))
+            return fs.copyFile("../beat-marker.py", path.resolve(buildPath, "../", "../", "../", "../", "beat-marker.py"))
           }
           else if (process.platform === "win32") {
-            return fs.copyFile("../main.py", path.resolve(buildPath, "../", "../", "main.py"))
+            return fs.copyFile("../beat-marker.py", path.resolve(buildPath, "../", "../", "beat-marker.py"))
           }
 
           return Promise.resolve()

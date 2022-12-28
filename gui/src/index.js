@@ -67,7 +67,7 @@ ipcMain.handle("executeScript", (event, type, track, bpm, offset) => {
 
   if (type == "timeline") {
 
-    let childProcess = spawn(command, [path.join(parentPath, "main.py"), "timeline", bpm, offset])
+    let childProcess = spawn(command, [path.join(parentPath, "beat-marker.py"), "timeline", bpm, offset])
 
     childProcess.stdout.on("data", (msg) => {
       dialog.showErrorBox("Error", msg.toString())
@@ -76,7 +76,7 @@ ipcMain.handle("executeScript", (event, type, track, bpm, offset) => {
   }
   else if (type == "clip") {
 
-    let childProcess = spawn(command, [path.join(parentPath, "main.py"), "clip", track, bpm, offset])
+    let childProcess = spawn(command, [path.join(parentPath, "beat-marker.py"), "clip", track, bpm, offset])
 
     childProcess.stdout.on("data", (msg) => {
       dialog.showErrorBox("Error", msg.toString())
