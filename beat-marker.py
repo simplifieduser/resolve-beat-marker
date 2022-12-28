@@ -62,14 +62,11 @@ if len(sys.argv) == 1:
     print("Opening editor...")
 
     if sys.platform.startswith("darwin"):
-        command = 'open "' + str(path) +'/beat-marker_gui.app"'
-        subprocess.Popen(command)
+        subprocess.Popen("open ./beat-marker_gui.app", cwd=path, shell=True)
     elif sys.platform.startswith("win") or sys.platform.startswith("cygwin"):
-        command = '"' + str(path) + '\\beat-marker_gui.exe"'
-        subprocess.Popen(command)
+        subprocess.Popen("beat-marker_gui.exe", cwd=path, shell=True)
     elif sys.platform.startswith("linux"):
-        command = '"' + str(path) + '/beat-marker_gui"'
-        subprocess.Popen(command)
+        subprocess.Popen("./beat-marker_gui", cwd=path, shell=True)
 
     sys.exit()
 
